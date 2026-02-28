@@ -15,6 +15,8 @@ pip install lunardate
 ## Quick Start
 
 ```python
+import datetime
+
 from lunardate import LunarDate
 
 lunar = LunarDate.from_solar_date(1976, 10, 1)
@@ -66,6 +68,22 @@ ruff check .
 ## Limits
 
 This library can only deal with years from 1900 to 2099 (Chinese calendar years).
+
+## Attribution
+
+This project is a modernization of the original `python-lunardate` library by
+LI Daobing (lidaobing@gmail.com). Upstream source:
+https://github.com/lidaobing/python-lunardate
+
+The conversion data and algorithms are derived from the C program `lunar`:
+http://packages.qa.debian.org/l/lunar.html
+
+See `NOTICE.md` for attribution details.
+
+## License
+
+Licensed under the GNU General Public License v3.0 only (GPL-3.0-only).
+See `LICENSE.txt` and `NOTICE.md`.
 
 ## See also
 
