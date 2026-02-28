@@ -13,7 +13,7 @@ from lunardate import _conversions
 class LunarDate:
     """Value type representing a Chinese lunar date."""
 
-    __slots__ = ("_year", "_month", "_day", "_is_leap_month")
+    __slots__ = ("_day", "_is_leap_month", "_month", "_year")
 
     def __init__(self, year: int, month: int, day: int, is_leap_month: bool = False) -> None:
         _conversions.validate_lunar_date(year, month, day, is_leap_month)

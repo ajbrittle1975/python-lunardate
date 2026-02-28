@@ -66,12 +66,16 @@ def test_validate_rejects_bad_day() -> None:
         validate_lunar_date(1900, 1, 40, False)
 
 
-def test_solar_to_lunar_known_pairs(known_pairs: list[tuple[datetime.date, int, int, int, bool]]) -> None:
+def test_solar_to_lunar_known_pairs(
+    known_pairs: list[tuple[datetime.date, int, int, int, bool]],
+) -> None:
     for solar, year, month, day, is_leap in known_pairs:
         assert solar_to_lunar(solar.year, solar.month, solar.day) == (year, month, day, is_leap)
 
 
-def test_lunar_to_solar_known_pairs(known_pairs: list[tuple[datetime.date, int, int, int, bool]]) -> None:
+def test_lunar_to_solar_known_pairs(
+    known_pairs: list[tuple[datetime.date, int, int, int, bool]],
+) -> None:
     for solar, year, month, day, is_leap in known_pairs:
         assert lunar_to_solar(year, month, day, is_leap) == solar
 

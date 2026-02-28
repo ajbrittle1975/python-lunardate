@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import datetime
-from typing import Iterator
+from collections.abc import Iterator
 
 from lunardate._data import END_YEAR, START_YEAR, YEAR_DAYS, YEAR_INFOS
 
@@ -22,10 +22,11 @@ def enum_month(year_info: int) -> Iterator[tuple[int, int, bool]]:
         raise ValueError(f"yearInfo {year_info!r} mod 16 should be in [0, 12]")
 
     for month, is_leap_month in months:
-        if is_leap_month:
-            days = (year_info >> 16) % 2 + 29
-        else:
-            days = (year_info >> (16 - month)) % 2 + 29
+        days = (
+            (year_info >> 16) % 2 + 29
+            if is_leap_month
+            else (year_info >> (16 - month)) % 2 + 29
+        )
         yield month, days, is_leap_month
 
 
@@ -90,11 +91,12 @@ def offset_to_lunar(offset: int) -> tuple[int, int, int, bool]:
 
     for idx, year_days in enumerate(YEAR_DAYS):
         if offset < year_days:
+            year = START_YEAR + idx
+            year_info = YEAR_INFOS[idx]
             break
         offset -= year_days
-    year = START_YEAR + idx
-
-    year_info = YEAR_INFOS[idx]
+    else:
+        raise ValueError("offset out of range")
     for month, days, is_leap_month in enum_month(year_info):
         if offset < days:
             return year, month, offset + 1, is_leap_month
