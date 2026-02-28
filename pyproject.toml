@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lunardate"
+version = "1.0.0"
+description = "A Chinese Calendar Library in Pure Python"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "GPL-3.0-only"
+license-files = ["LICENSE.txt"]
+authors = [
+    { name = "LI Daobing", email = "lidaobing@gmail.com" },
+]
+keywords = ["chinese", "lunar", "calendar", "date", "conversion"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.0",
+    "mypy>=1.8",
+    "pytest>=8.0",
+    "ruff>=0.3",
+]
+
+[project.urls]
+Homepage = "https://github.com/lidaobing/python-lunardate"
+Repository = "https://github.com/lidaobing/python-lunardate"
+Issues = "https://github.com/lidaobing/python-lunardate/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lunardate = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unused_configs = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 99
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF"]
